@@ -13,4 +13,9 @@ class Post extends Model
     public function type(){
        return $this->belongsTo(Type::class);
     }
+
+    //il nostro post sarà collegato a diverse tecnologie (infatti chiamo la funzione al plurale)
+    public function technologies() {
+        return $this->belongsToMany(Technology::class);
+    }
 }
