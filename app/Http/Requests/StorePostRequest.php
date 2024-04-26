@@ -29,7 +29,9 @@ class StorePostRequest extends FormRequest
             'type_id'=>'nullable|exists:types,id',
             'Descrizione' => 'required',
             'Immagine_di_copertina' =>'nullable',
-            'Tecnologie_utilizzate' =>'nullable',
+            //il nome a sinistra, nel nostro caso "technologies" DEVE combaciare con 
+            //il nome che abbiamo messo nell'opzione "name" nell'input tag del form
+            'technologies' => 'nullable|exists:technologies,id',
             'Link_repo_GitHub' => 'nullable'     
         ];
     }

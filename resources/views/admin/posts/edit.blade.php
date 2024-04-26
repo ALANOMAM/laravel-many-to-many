@@ -26,15 +26,15 @@
            <!--parte che rigiarda i tipi start-->
        <div class="mb-3">
         <label for="type_id" class="form-label"><strong>Tipi</strong></label>
-        {{--@dump($types)--}}
-        
+           {{--@dump($types)--}}
+          
           <select class="form-select" name="type_id" id="type_id">
             <option value=""></option>
             @foreach($types as $type)
             {{-- la parte "{{$type->id == $post->type_id ? 'selected' : '' }}" aggiunge "selected" mia 
             opzione se soddisfa la condizione, con l'aggiunta della parola "selectied" ad una opzione 
             mi restituisce il valore presente nell'opzione--}}
-            <option value="{{$type->id}}" {{$type->id == $post->type_id ? 'selected' : '' }}>{{$type->title}}</option>
+            <option  value="{{$type->id}}" {{$type->id == old('type_id',$post->type ? $post->type->id : '') ? 'selected' : '' }}>{{$type->title}}</option>
             @endforeach
           </select>
       

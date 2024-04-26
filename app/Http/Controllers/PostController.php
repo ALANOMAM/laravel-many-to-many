@@ -42,7 +42,7 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
 
-         //dd($request);
+          //dd($request);
 
         $request->validated();
 
@@ -60,6 +60,8 @@ class PostController extends Controller
             $newPostElement->Immagine_di_copertina = $path;
         }
       
+         //il pezzo che mi collega alla creazione nel database
+         $newPostElement->type_id = $request['type_id'];
 
         $newPostElement->Link_repo_GitHub = $request['Link_repo_GitHub'];
         
@@ -83,6 +85,7 @@ class PostController extends Controller
         //
         
          //dd($post->technologies);
+         //dd($post->type_id);
 
         return view("admin/posts/show", compact('post'));
     }
@@ -130,6 +133,9 @@ class PostController extends Controller
         //NB PER ORA LASCIAMO LA UPDATE CON QUESTA SOLUZIONE TEMPORANEA, RIGUARDEREMO MEGLIO PIU AVANTI INSIEME
         //A ELIMINAZIONE DELL'IMMAGINE 
         //$newPostElement2->Immagine_di_copertina = $request['Immagine_di_copertina'];
+        
+        //il pezzo che mi collega alle modifiche del database
+        $newPostElement2->type_id = $request['type_id'];
 
         $newPostElement2->Link_repo_GitHub = $request['Link_repo_GitHub'];
         
