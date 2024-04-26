@@ -135,7 +135,9 @@ class PostController extends Controller
         
         $newPostElement2->save();
 
-         // modifichiamo i tag collegati al post
+         // modifichiamo le tecnologie collegate al post
+         //"sync" ci aggiorna la tabella ponte eliminando e aggiungendo le tec selezionate
+         // visto che in una data modifica può darsi che voremmo togliere delle tec e non solo aggiungere
          $newPostElement2->technologies()->sync($request->technologies); 
 
         return redirect()->route("admin.posts.show", $newPostElement2->id);

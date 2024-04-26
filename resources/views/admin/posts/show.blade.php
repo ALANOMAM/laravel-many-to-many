@@ -13,18 +13,31 @@
 
      
 
-    <ul class="list-group">
+    <ul class="list-group container">
       <li class="list-group-item"><span><strong>Nome File : </strong></span>{{$post->Nome}}</li>
       {{---{{$post->type?->title}} quetso pezzo di codice mi permette di avere accesso al titolo del tipo
       questa manovra va fatta in sintonia con quello che succede nel model "Post.php" appunto perche il
       "type" che vediamo scritto li è il nome che abbiamo dato alla FUNZIONE nel model "Post.php"--}}
       <li class="list-group-item"><span><strong>Tipo File : </strong></span>{{$post->type?->title}}</li>
       <li class="list-group-item"><span><strong>Descrizione File : </strong></span>{{$post->Descrizione}}</li>
-      <li class="list-group-item"><span><strong>Tecnologie Utilizzate : </strong></span>{{$post->Tecnologie_utilizzate}}</li>
+      <li class="list-group-item"><span><strong>Tecnologie Utilizzate :</strong></span>
+        
+          @foreach ($post->technologies as $technology)
+          <span>{{$technology->titolo}}</span>
+           {{--<span class="badge rounded-pill" style="background-color: {{$technology->colore ?? 'rgba(255,255,255,.4)'}}">{{$technology->titolo}}</span>--}}
+          @endforeach
+        
+      </li>
+
       <li class="list-group-item"><span><strong>Link GitHub : </strong></span><a href="{{$post->Link_repo_GitHub}}">{{$post->Link_repo_GitHub}}</a></li>
     </ul>
   </div>
 <!--contenitore immagine e info end-->
+
+
+
+
+
       
  
     <!--contenitore pulsanti start-->
