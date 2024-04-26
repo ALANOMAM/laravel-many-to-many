@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Type;
+use App\Models\Technology;
+
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
-use App\Models\Type;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -27,7 +29,11 @@ class PostController extends Controller
     public function create()
     {    //prendo tutti i tipi e li passo alla vista create dei posts
          $types = Type::all();
-        return view("admin/posts/create", compact('types'));
+
+         // prelevo tutte le tecnologie dal database e li passo alla vista
+        $technologies = Technology::all();
+
+        return view("admin/posts/create", compact('types','technologies'));
     }
 
     /**
@@ -36,7 +42,7 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
 
-        //dd($request);
+         //dd($request);
 
         $request->validated();
 
@@ -53,10 +59,18 @@ class PostController extends Controller
             
             $newPostElement->Immagine_di_copertina = $path;
         }
-     
+      
+
         $newPostElement->Link_repo_GitHub = $request['Link_repo_GitHub'];
         
         $newPostElement->save();
+
+        // quando dobbiamo inserire dei dati presenti in una tabella ponte (con relazione many to many)
+        // dobbiamo fare tutto DOPO il ->save()
+
+        // importante: quando colleghiamo un metodo alle techs (in questo caso) siamo obbligati ad inserire le parentesi
+        // normalmente, se dobbiamo solo leggere i tags invece non sono necessarie
+        $newPostElement->technologies()->attach($request->technologies);
 
         return redirect()->route("admin.posts.show", $newPostElement->id);
     }
@@ -67,7 +81,9 @@ class PostController extends Controller
     public function show(Post $post)
     {
         //
-        // $post = Post::find($id);
+        
+         //dd($post->technologies);
+
         return view("admin/posts/show", compact('post'));
     }
 
@@ -75,11 +91,15 @@ class PostController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-    {
+    {   
         $post = Post::find($id);
+
         //selezionare i tipi nell'edit
         $types = Type::all();
-        return view("admin/posts/edit",compact('post','types'));
+        //selezionare le tecnologie nell'edit
+        $technologies = Technology::all();
+
+        return view("admin/posts/edit",compact('post','types','technologies'));
     }
 
     /**
@@ -110,10 +130,13 @@ class PostController extends Controller
         //NB PER ORA LASCIAMO LA UPDATE CON QUESTA SOLUZIONE TEMPORANEA, RIGUARDEREMO MEGLIO PIU AVANTI INSIEME
         //A ELIMINAZIONE DELL'IMMAGINE 
         //$newPostElement2->Immagine_di_copertina = $request['Immagine_di_copertina'];
-        
+
         $newPostElement2->Link_repo_GitHub = $request['Link_repo_GitHub'];
         
         $newPostElement2->save();
+
+         // modifichiamo i tag collegati al post
+         $newPostElement2->technologies()->sync($request->technologies); 
 
         return redirect()->route("admin.posts.show", $newPostElement2->id);
 

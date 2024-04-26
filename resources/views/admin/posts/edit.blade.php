@@ -64,11 +64,45 @@
             </div>
             
             
+           <!--sezione tecnologie start-->
+             {{-- @dump(old('technologies')) --}}
+        <div class="mb-4">
+          <label class="mb-2" for="">Technology</label>
+          <div class="d-flex gap-4">
 
-            <div class="mb-3">
-              <label for="Tecnologie_utilizzate" class="form-label"><strong>Tecnologie Utilizzate</strong></label>
-              <input type="string" class="form-control" id="Tecnologie_utilizzate" name="Tecnologie_utilizzate" value="{{old('Tecnologie_utilizzate')??$post->Tecnologie_utilizzate}}">
-            </div>
+              @foreach($technologies as $technology)
+              <div class="form-check ">
+                  <input 
+                      type="checkbox" 
+                      name="technologies[]"
+                      value="{{$technology->id}}" 
+                      class="form-check-input" 
+                      id="technology-{{$technology->id}}"
+                      
+                      {{-- controlliamo se sono presenti errori (stiamo probabilmente ricevendo dei parametri old() ) --}}
+                      {{-- se abbiamo errori e quindi old() --}}  
+                      @if($errors->any())
+
+                      {{ in_array($technology->id, old('technologies', [])) ? 'checked' : '' }}
+
+                      @else 
+
+                      {{ $post->technologies->contains($technology) ? 'checked' : '' }}
+                      
+                      @endif
+                  > 
+                  
+                  <label for="technology-{{$technology->id}}" class="form-check-label">{{$technology->titolo}}</label>
+              </div>
+              @endforeach
+
+          </div>
+      </div>
+           <!--sezione tecnologie end-->
+
+
+
+           
 
             <div class="mb-3">
               <label for="Link_repo_GitHub" class="form-label"><strong>Link Per GitHub</strong></label>

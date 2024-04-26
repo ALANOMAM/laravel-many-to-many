@@ -59,9 +59,25 @@
             
             
 
-            <div class="mb-3">
-              <label for="Tecnologie_utilizzate" class="form-label"><strong>Tecnologie Utilizzate</strong></label>
-              <input type="string" class="form-control" id="Tecnologie_utilizzate" name="Tecnologie_utilizzate" value="{{old('Tecnologie_utilizzate')}}">
+            <div class="mb-3 d-flex">
+               {{--@dump($technologies)--}}
+               <label class="mb-2" for=""> <strong>Technology</strong></label>
+               @foreach($technologies as $technology)
+               <div class="form-check">
+                {{--"id" e "for" in questo caso ci permettono solo di collegare la label alla checkbox in modo
+                tale che posso evidenziiare la casella sia cliccando direttamente su di essa che cliccando sul nome --}}
+                <input 
+                type="checkbox" 
+                name="technologies[]" 
+                value="{{$technology->id}}" 
+                id="{{$technology->id}}"
+                {{--la riga sotto mi mantiene i vecchi checked checked se qualcosa va storto nel form--}}
+                {{ in_array($technology->id, old('technologies', [])) ? 'checked' : '' }}
+                >
+                <label for="{{$technology->id}}">{{$technology->titolo}}</label>
+               </div>
+               @endforeach
+
             </div>
 
             <div class="mb-3">
