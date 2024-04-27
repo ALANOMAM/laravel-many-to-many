@@ -16,19 +16,19 @@
       
  
     <!--contenitore pulsanti start-->
-   {{-- <div class="py-5 d-flex gap-4">
+   <div class="py-5 d-flex gap-4">
       <!--pulsante di modifica-->
-     <a href="{{route('admin.posts.edit', $post->id)}}" class="btn btn-warning">Modifica</a>
+     <a href="{{route('admin.technologies.edit', $technology->id)}}" class="btn btn-warning">Modifica</a>
       
      <!--il moi pulsante per l'eliminazione deve essere dentro un mini form-->
-    <form action="{{route('admin.posts.destroy', $post->id)}}" method="POST">
+    <form action="{{route('admin.technologies.destroy', $technology->id)}}" method="POST">
    <!--serve questo commando -->
    @csrf
    <!--serve questo commando -->
    @method("DELETE")
    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"> Elimina</button>
   </form>
-   </div> --}}
+   </div> 
 <!--contenitore pulsanti end-->
 
 

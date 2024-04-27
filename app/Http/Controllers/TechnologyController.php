@@ -65,15 +65,27 @@ class TechnologyController extends Controller
      */
     public function edit(Technology $technology)
     {
-        //
+        return view("admin/technologies/edit",compact('technology'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTechnologyRequest $request, Technology $technology)
+    public function update(StoreTechnologyRequest $request, string $id)
     {
-        //
+          // dd($request);
+
+         $request->validated();
+
+         $newTechElement = Technology::find($id);
+ 
+          
+         $newTechElement->titolo = $request['titolo'];  
+         $newTechElement->colore = $request['colore'];
+ 
+         $newTechElement->save();
+ 
+         return redirect()->route("admin.technologies.show", $newTechElement->id);
     }
 
     /**
