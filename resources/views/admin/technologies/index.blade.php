@@ -27,7 +27,7 @@
     </tbody>
   </table>
 
-   {{--<a href="{{route('admin.posts.create')}}" class="btn btn-primary">Aggiungi tecnologia</a>--}}
+   <a href="{{route('admin.technologies.create')}}" class="btn btn-primary">Aggiungi tecnologia</a>
  
 </div>
 @endsection
