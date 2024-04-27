@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TechnologyController;
 use App\Http\Controllers\TypeController;
 use Illuminate\Support\Facades\Route;
 
@@ -56,9 +57,14 @@ Route::middleware(['auth', 'verified'])
           
             Route::resource('posts',PostController::class);
 
-            //la rotta che mi crea il trio con TypeController e la cartella types di 
+            //la rotta che mi crea il trio con "TypeController" e la cartella "types" di 
            //admin, dove sono presenti le varie viste, show, edit,ecc dei tipi
             Route::resource('types',TypeController::class);
+
+
+             //la rotta che mi crea il trio con "TechnologyController" e la cartella "technologies" di 
+           //admin, dove sono presenti le varie viste, show, edit,ecc delle tecnologie
+            Route::resource('technologies',TechnologyController::class);
 
         }
 
