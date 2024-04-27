@@ -13,7 +13,9 @@ class TechnologyController extends Controller
      */
     public function index()
     {
-        //
+        $technologies = Technology::all();
+        //mi porta alla vista index dei tipi
+        return view('admin/technologies/index',compact('technologies'));
     }
 
     /**
@@ -37,7 +39,13 @@ class TechnologyController extends Controller
      */
     public function show(Technology $technology)
     {
-        //
+        //con questo commando posso avere accesso a tutti i posts che hanno una determinata tecnologia
+        // questo grazie al fatto che nel model "Technology.php" ho creato una relazione 
+        // dd($technology->posts);
+
+
+        //mi porta alla vista index dei tipi
+        return view('admin/technologies/show',compact('technology'));
     }
 
     /**

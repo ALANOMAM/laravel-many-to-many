@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container py-5">
-    <h1>PAGINA INDEX DEI TIPI</h1>
-    {{---@dd($types)---}}
+    <h1>PAGINA INDEX DELLE TECNOLOGIE</h1>
+    {{---@dd($technologies)---}}
 
 
    <table class="table">
@@ -15,15 +15,15 @@
     </thead>
 
     <tbody>
-       
-       @foreach ($types as $type)
+        
+       @foreach ($technologies as $technology)
         <tr>      
-        <td>{{$type->id}} - {{$type->title}}</td>
-        <td>{{$type->description}}</td>
-        <td><a class="btn btn-success" href="{{route('admin.technologies.show' , $type->id )}}">visualizza tecnologia</a></td>
+        <td>{{$technology->id}} - {{$technology->titolo}}</td>
+        <td>{{$technology->colore}}</td>
+        <td><a class="btn btn-success" href="{{route('admin.technologies.show' , $technology->id )}}">visualizza tecnologia</a></td>
        </tr>
         @endforeach 
-        
+         
     </tbody>
   </table>
 
