@@ -27,7 +27,7 @@
     </tbody>
   </table>
 
-  <a href="{{route('admin.posts.create')}}" class="btn btn-primary">Aggiungi tipo</a>
+  <a href="{{route('admin.types.create')}}" class="btn btn-primary">Aggiungi tipo</a>
  
 </div>
 @endsection
