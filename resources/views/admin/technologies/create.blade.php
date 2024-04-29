@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container py-5">
-    <h1>PAGINA CREATE DEI TIPI</h1>
+    <h1>PAGINA CREATE DELLE TECNOLOGIE</h1>
 
         <!--indichiamo anche il metodo POST per la richesta-->
         <form action="{{ route('admin.technologies.store')}}" method="POST" >
